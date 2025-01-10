@@ -1,6 +1,7 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -10,6 +11,7 @@ const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
+app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html")).send(200);
